@@ -1,0 +1,35 @@
+{% extends 'inc/base.html' %}
+{% block content %}
+<div class="container my-3">
+    <div class="d-flex justify-content-end">
+         <a href="{% url 'cityList' %}">
+            <button type="button" class="btn text-white" style="background-color: #800517">
+                <span class="fa fa-backward"></span>
+            </button>
+        </a>
+
+    </div><br>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-primary" role="alert">{{ message }}</div>
+        {% endfor %}
+
+    </ul>
+    {% endif %}
+    <div class="card">
+    <h5 class="card-hearder text-white" style="background-color: #800517">And New City</h5>
+    <div class="card-body">
+        <form action="{% url 'storeCity' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group my-2">
+                <label for="cityName"><strong>City Name:</strong></label>
+                <input type="text"class="from-control" id="cityName" name="cityName" />
+            </div>
+            <button type="submit" class="btn my-3 text-white" style="background-color: #800517">Post</button>
+        </form>
+
+    </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'inc/base.html' %} {% block content %}
+<div class="container my-3">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-primary" role="alert">{{ message }} </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'createCity' %}">
+            <button type="button" class="btn text-white" style="background-color: #800517;">
+            <span class="fa fa-plus"> </span>
+        </button>
+                
+        </a>
+
+    </div>
+    <br />
+    <table class="table table-bordered">
+        <thead class="text-white font-white-bold" style="background-color: #800517;">
+        <tr>
+            <th>City</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for city in cities %}
+            <tr>
+                <td>
+                    {{ city.cityname}}
+                </td>
+                <td>
+                <a href="{% url 'editCityView' city.pk %}" class="text-decoration-none">
+                    <button type="button" class="btn btn-info">
+                        <span class="fa fa-pen text-white"></span>
+                    </button>
+                </a>
+                <a href="{% url 'deleteCity' city.pk %}" class="text-decoration-none">
+                    <button type="button" class="btn btn-danger">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
